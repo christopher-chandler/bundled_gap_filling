@@ -9,9 +9,11 @@ import kenlm
 # Custom
 from api_nlp.language_model.model import calcualte_sentence_score
 
-sentence = 'I liked fish market  .'
-b = calcualte_sentence_score(sentence)
 
+sentence = "I liked fish market  .", "I like fish market"
+model_results = calcualte_sentence_score(sentence)
 
-if __name__ == '__main__':
+print(model_results)
+
+if __name__ == "__main__":
     pass

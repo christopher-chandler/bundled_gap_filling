@@ -51,7 +51,7 @@ Bundled Gap Filling: A New Paradigm for Unambiguous Cloze Exercises
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#literature">Literature</a></li>
   </ol>
 </details>
 
@@ -89,10 +89,9 @@ TBA
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] a probabilistic model for estimating level of ambiguity for bundled gap filling exercises
+- [ ] a scheme to automatically construct exercises, such that ambiguity is minimized.
+
 
 See the [open issues](https://github.com/christopher-chandler/bundled_gap_filling/issues) for a full list of proposed 
 features (and known issues).
@@ -127,16 +126,14 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 Christopher Chandler - christopher.chandler@outlook.de
 
+
 Project Link: [https://github.com/christopher-chandler/bundled_gap_filling](https://github.com/christopher-chandler/bundled_gap_filling)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
+<!-- Literature -->
+## Literature
+* [Wojatzki et al.](https://aclanthology.org/W16-0519.pdf)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

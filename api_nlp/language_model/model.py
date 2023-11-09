@@ -1,15 +1,16 @@
-# Standard 
-# None 
+# Standard
+# None
 
 # Pip
 import kenlm
 
-# Custom 
+# Custom
 # None
 
 """
 main body 
 """
+
 
 def percentage_difference(value1, value2):
     if value1 == 0 and value2 == 0:
@@ -23,12 +24,23 @@ def percentage_difference(value1, value2):
         numerator = value1
         denominator = value2
 
-    return round(abs((numerator - denominator) / ((numerator + denominator) / 2)) * 100,2)
-
-def calcualte_sentence_score (sentence):
-    model = kenlm.LanguageModel("data/en-70k-0.2-pruned.lm")
-    return model.score(sentence)
+    return round(
+        abs((numerator - denominator) / ((numerator + denominator) / 2)) * 100, 2
+    )
 
 
-if __name__ == '__main__':
+def calcualte_sentence_score(sentences: list):
+    model = kenlm.LanguageModel(
+        "/Users/christopherchandler/CodeRepo/christopher-chandler/"
+        "python/bgf/data/language_model/en-70k-0.2-pruned.lm"
+    )
+    score_results = []
+
+    for sen in sentences:
+        score_results.append(model.score(sen))
+
+    return score_results
+
+
+if __name__ == "__main__":
     pass

@@ -1,15 +1,15 @@
-# Standard 
-# None 
+# Standard
+# None
 
 # Pip
-# None 
+# None
 
-# Custom 
-# None 
+# Custom
+# None
 
 """
 main body 
 """
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pass
