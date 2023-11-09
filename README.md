@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/christopher-chandler/bundled_gap_filling">
-    Bundeled Gap Filling
+        <img src="documentation /readme/logo.png" alt="Logo" width="380" height="100">
   </a>
 
 ![Version][Version-shield]  [![MIT License][license-shield]][license-url] ![update][update-shield]
@@ -19,7 +19,7 @@
 <h3 align="center">Bundled Gap Filling</h3>
 
   <p align="center">
-Bundled Gap Filling: A New Paradigm for Unambiguous Cloze Exercises
+A New Paradigm for Unambiguous Cloze Exercises
     <br />
     <br />
     <a href="https://github.com/christopher-chandler/bundled_gap_filling/issues">Report Bug</a>
@@ -88,10 +88,7 @@ TBA
 
 <!-- ROADMAP -->
 ## Roadmap
-
-- [ ] a probabilistic model for estimating level of ambiguity for bundled gap filling exercises
-- [ ] a scheme to automatically construct exercises, such that ambiguity is minimized.
-
+- [ ] TBA
 
 See the [open issues](https://github.com/christopher-chandler/bundled_gap_filling/issues) for a full list of proposed 
 features (and known issues).
