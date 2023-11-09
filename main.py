@@ -8,7 +8,7 @@ import sys
 import kenlm
 
 # Custom
-from lm.language_model import calcualte_sentence_score
+from api_nlp.language_model.model import calcualte_sentence_score
 
 sentence = 'I liked fish market  .'
 b = calcualte_sentence_score(sentence)
