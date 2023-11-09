@@ -2,10 +2,10 @@
 # None 
 
 # Pip
-# None 
+import kenlm
 
 # Custom 
-# None 
+# None
 
 """
 main body 
@@ -24,6 +24,10 @@ def percentage_difference(value1, value2):
         denominator = value2
 
     return round(abs((numerator - denominator) / ((numerator + denominator) / 2)) * 100,2)
+
+def calcualte_sentence_score (sentence):
+    model = kenlm.LanguageModel("data/en-70k-0.2-pruned.lm")
+    return model.score(sentence)
 
 
 if __name__ == '__main__':
