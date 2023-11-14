@@ -29,7 +29,7 @@ def percentage_difference(value1, value2):
     )
 
 
-def calcualte_sentence_score(sentences: list):
+def calculate_sentence_score(sentences: list):
     model = kenlm.LanguageModel(
         "/Users/christopherchandler/CodeRepo/christopher-chandler/"
         "python/bgf/data/language_model/en-70k-0.2-pruned.lm"

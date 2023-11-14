@@ -3,6 +3,15 @@
 # Abstract 
 
 # 1. Introduction 
+- [ ] cloze tests 
+  - Cloze-tests (or gap-ﬁll tasks) (Taylor, 1953) are a frequently used exercise type, where a target word in a sentence is hidden and replaced with a gap.
+- [ ] gap-ﬁll tasks
+  - The ambiguity can be countered by providing a set of answer candidates for the learner to choose from.
+    - single correct solution 
+    - a set of incorrect distractors 
+      - If they are too disimilar to the task at hand, the the task is too easy 
+    
+
 
 # 2. Bundelded Gap Filling Exercises 
 
@@ -30,7 +39,7 @@
 
 ## 4.1 Setup
 
-# 4.2 Results
+## 4.2 Results
 
 # 5 Related Work 
 
