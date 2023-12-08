@@ -13,7 +13,7 @@ from api_nlp.language_model.model import calculate_sentence_score
 sentence = "I liked fish market  .", "I like fish market ."
 model_results = calculate_sentence_score(sentence)
 
-print(model_results)
+print(1, model_results)
 
 if __name__ == "__main__":
     pass

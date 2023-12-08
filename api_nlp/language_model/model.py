@@ -30,10 +30,7 @@ def percentage_difference(value1, value2):
 
 
 def calculate_sentence_score(sentences: list):
-    model = kenlm.LanguageModel(
-        "/Users/christopherchandler/CodeRepo/christopher-chandler/"
-        "python/bgf/data/language_model/en-70k-0.2-pruned.lm"
-    )
+    model = kenlm.LanguageModel("data/language_model/en-70k-0.2-pruned.lm")
     score_results = []
 
     for sen in sentences:
