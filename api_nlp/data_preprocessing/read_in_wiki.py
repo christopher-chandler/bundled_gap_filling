@@ -79,6 +79,7 @@ if __name__ == "__main__":
         "nlp/rub/bundled_gap_filling/data/wiki_data/simple_wiki_en_01_319188.json"
     )
     wiki_data = WikiData(incoming_file=file_path)
+    for text in wiki_data.get_data_by_categories("mammals"):
+        print(text.get("text").strip())
 
-    for i in wiki_data.get_data_by_categories("white"):
-        print(i.get("categories"))
+
