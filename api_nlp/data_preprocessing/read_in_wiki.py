@@ -8,7 +8,7 @@ class WikiData:
     A class for processing and retrieving data from a JSON file containing wiki information.
     """
 
-    def __init__(self, incoming_file: str):
+    def __init__(self, incoming_file: str, categories: str):
         """
         Initialize the WikiData object.
 
@@ -16,6 +16,7 @@ class WikiData:
         - incoming_file (str): The path to the input JSON file.
         """
         self.incoming_file = incoming_file
+        self.categories = categories
 
     def read_in_wiki(self) -> List[dict]:
         """
@@ -24,9 +25,16 @@ class WikiData:
         Returns:
         - List[dict]: A list of dictionaries containing wiki data.
         """
-        with open(self.incoming_file) as infile:
-            data = json.load(infile)
-        return data
+        try:
+            with open(self.incoming_file) as infile:
+                data = json.load(infile)
+            return data
+        except FileNotFoundError:
+            print(f"File not found: {self.incoming_file}")
+            return []
+        except json.JSONDecodeError:
+            print(f"Error decoding JSON in file: {self.incoming_file}")
+            return []
 
     def get_data_by_categories(self, category_type: str) -> List[dict]:
         """
@@ -44,7 +52,9 @@ class WikiData:
             for c in item.get("categories", [])
             if c
         }
-        category_result = [categories[c] for c in categories if category_type in c.lower()]
+        category_result = [
+            categories[c] for c in categories if category_type in c.lower()
+        ]
         return category_result
 
     def get_data_by_id(self, id: Union[int, str]) -> Optional[dict]:
@@ -72,14 +82,33 @@ class WikiData:
         """
         return re.sub(r"[^\w\s]", "", text)
 
+    def save_as_one_file(self) -> None:
+        """
+        Save text data from the specified category to a text file.
+
+        Reads data from the JSON file based on the specified category,
+        extracts text content, and saves it to a text file named 'results.txt'.
+
+        The saved file is located in the '../../data/save_wiki_text/' directory.
+
+        Returns:
+        - None
+        """
+        categories = self.categories
+        save_file = open("../../data/save_wiki_text/results.txt", mode="w+")
+
+        for text in wiki_data.get_data_by_categories(categories):
+            t = text.get("text")
+            sentence = t.split("\n")
+            for sen in sentence[1:]:
+                sen = sen.replace("\n", "")
+                if sen:
+                    save_file.write(sen + "\n")
+
 
 if __name__ == "__main__":
-    file_path = (
-        "/Users/christopherchandler/code_repos/christopher-chandler/Python/"
-        "nlp/rub/bundled_gap_filling/data/wiki_data/simple_wiki_en_01_319188.json"
-    )
-    wiki_data = WikiData(incoming_file=file_path)
-    for text in wiki_data.get_data_by_categories("mammals"):
-        print(text.get("text").strip())
 
+    file_path = "/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/wiki_data/simple_wiki_en_01_319188.json"
+    wiki_data = WikiData(incoming_file=file_path, categories="mammals")
 
+    wiki_data.save_as_one_file()
