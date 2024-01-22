@@ -67,7 +67,8 @@ A New Paradigm for Unambiguous Cloze Exercises
  
 
 ### Prerequisites
- 
+Python 3.10
+[Kenlm]()
 
 ### Installation
  
