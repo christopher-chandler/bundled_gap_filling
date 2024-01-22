@@ -1,6 +1,5 @@
 # Standard
 import subprocess
-import os
 
 # Pip
 # None
