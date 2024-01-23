@@ -6,7 +6,7 @@ import random
 import kenlm
 
 # Custom
-# None
+from api_nlp.fastsubs_wrapper.fastsubs import FastSubs
 
 # Methode, die seed sentence aussucht und target darin markiert
 m = "data/language_model/en-70k-0.2-pruned.lm"
@@ -26,16 +26,18 @@ def choose_seed(target, corpus_list):
     # (hier einmal eine Version, wo das Target nicht markiert wird...)
     og_sentence = corpus_list[seed_id]
     # warum ist eat hier auch markiert??
-    print(og_sentence)
+
     return (seed_id, seed_sentence, og_sentence)
 
 
-def fastsubs(sentence, target):
-    # Platzhaltermethode.
-    # Bekommt einen Satz mit markiertem Target als input und sucht Wörter,
-    # die das Target ersetzen könnten.
-    distractors = ["digest", "drink" "medicine"]
-    return distractors
+def fastsubs_gap_generator( ):
+    fastsubs_instance = FastSubs()
+
+    # Example input sentences
+    input_sentences = ["Sarah eats apples too",]
+    prob = fastsubs_instance.run_fastsubs(input_sentences)
+
+    return prob
 
 
 ###########Hilfsmethoden kenlm##############
