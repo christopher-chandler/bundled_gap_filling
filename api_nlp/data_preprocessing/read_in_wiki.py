@@ -95,20 +95,29 @@ class WikiData:
         - None
         """
         categories = self.categories
-        save_file = open("../../data/save_wiki_text/results.txt", mode="w+")
+        save_file = open(
+            "../../data/incoming_text_data/wiki_data_results.txt", mode="w+"
+        )
 
         for text in wiki_data.get_data_by_categories(categories):
             t = text.get("text")
-            sentence = t.split("\n")
-            for sen in sentence[1:]:
-                sen = sen.replace("\n", "")
-                if sen:
-                    save_file.write(sen + "\n")
+            document = t.split("\n")
+            for doc in document[1:]:
+                sen = doc.replace("\n", "")
+
+                doc = sen.split(".")
+
+                for row in doc:
+                    if len(row) > 1:
+                        save_file.write(row.strip() + "\n")
 
 
 if __name__ == "__main__":
 
-    file_path = "/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/wiki_data/simple_wiki_en_01_319188.json"
+    file_path = (
+        "/Users/christopherchandler/code_repos/christopher-chandler/"
+        "Python/nlp/rub/bundled_gap_filling/data/wiki_data/simple_wiki_en_01_319188.json"
+    )
     wiki_data = WikiData(incoming_file=file_path, categories="mammals")
 
     wiki_data.save_as_one_file()

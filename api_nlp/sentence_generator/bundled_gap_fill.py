@@ -15,29 +15,32 @@ model = kenlm.LanguageModel(m)
 
 def choose_seed(target, corpus_list):
     seed_id = random.randint(0, (len(corpus_list) - 1))
+
     seed_sentence = corpus_list[seed_id]
     n = 0
     while n < len(seed_sentence):
-        if target in seed_sentence[n]:
+
+        if target in seed_sentence[n].split():
+
             marked = "<" + target + ">"
             seed_sentence[n] = seed_sentence[n].replace(target, marked)
             break
         n = n + 1
-    # (hier einmal eine Version, wo das Target nicht markiert wird...)
+
     og_sentence = corpus_list[seed_id]
-    # warum ist eat hier auch markiert??
 
     return (seed_id, seed_sentence, og_sentence)
 
 
-def fastsubs_gap_generator( ):
-    fastsubs_instance = FastSubs()
+def fastsubs_gap_generator(fastsubs_instance, input_sentences, target_word):
 
-    # Example input sentences
-    input_sentences = ["Sarah eats apples too",]
     prob = fastsubs_instance.run_fastsubs(input_sentences)
 
-    return prob
+    for row in prob.keys():
+        if target_word in row:
+            return prob.get(row)
+    else:
+        return prob
 
 
 ###########Hilfsmethoden kenlm##############
@@ -58,7 +61,7 @@ def make_trigram(sentence):
         trigram = sentence[n] + " " + sentence[n + 1] + " " + sentence[n + 2]
         trigram_list.append(trigram)
         trigram_probs.append(get_score(trigram))
-        #print(get_score(trigram))
+        # print(get_score(trigram))
         n = n + 1
     return (trigram_list, trigram_probs)
 

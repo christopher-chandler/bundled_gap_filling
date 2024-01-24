@@ -1,11 +1,15 @@
 import subprocess
 
+
 class FastSubs:
-    def __init__(self, n_gram=2,
-                 model="../../data/language_model/en-70k-0.2-pruned.lm",
-                 incoming_data="../data/incoming_text_data/sentences.txt",
-                 fastsubs_m1="/Users/christopherchandler/code_repos/christopher-chandler"
-                             "/Python/nlp/rub/bundled_gap_filling/api_nlp/fastsubs_wrapper/fastsubs_m1"):
+    def __init__(
+        self,
+        n_gram=2,
+        model="../../data/language_model/en-70k-0.2-pruned.lm",
+        incoming_data="../data/incoming_text_data/sentences.txt",
+        fastsubs_m1="/Users/christopherchandler/code_repos/christopher-chandler"
+        "/Python/nlp/rub/bundled_gap_filling/api_nlp/fastsubs_wrapper/fastsubs_m1",
+    ):
         self.n_gram = n_gram
         self.model = model
         self.incoming_data = incoming_data
@@ -31,9 +35,7 @@ class FastSubs:
             process_output, _ = process.communicate(input=process_input)
 
             filtered_output = "\n".join(
-                line
-                for line in process_output.splitlines()
-                if "free lm..." not in line
+                line for line in process_output.splitlines() if "free lm..." not in line
             )
             results = filtered_output.split("\n")
 
