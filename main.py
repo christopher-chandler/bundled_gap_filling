@@ -71,8 +71,8 @@ def main(corpus, target):
 
 if __name__ == "__main__":
     corpus = open(
-        "data/incoming_text_data/sentences.txt",
+        "data/incoming_text_data/wiki_data_results.txt",
         "r",
     )
-    target = "pears"
+    target = "food"
     main(corpus, target)
