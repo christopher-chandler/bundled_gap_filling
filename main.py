@@ -7,10 +7,7 @@ from api_nlp.fastsubs_wrapper.fastsubs import FastSubs
 # None
 
 # Custom
-from api_nlp.sentence_generator.bundled_gap_fill import (
-    choose_seed,
-    fastsubs_gap_generator,
-)
+from api_nlp.sentence_generator.bundled_gap_generator import *
 
 fastsubs_instance = FastSubs(
     model="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/language_model/en-70k-0.2-pruned.lm",
@@ -20,42 +17,71 @@ fastsubs_instance = FastSubs(
 )
 
 
-def generate_bundle(incoming_data: str, target_word="") -> None:
-    # Korpus, aus dem Sätze gezogen werden sollen,
-    # und Target festlegen sowie leeres Bundle initiieren
-    corpus = open(incoming_data, "r")
-
+def main(corpus):
+    # Korpus, aus dem Sätze gezogen werden sollen, und Target festlegen sowie leeres Bundle initiieren
+    print("Initialisierung...")
+    target = "eat"
     bundle = []
-
-    # macht aus dem Korpus eine Liste mit allen Sätzen, die unser Target enthalten
+    # Sätze, die das Target enthalten, als Liste in Liste schreiben
     corpus_list = []
     for line in corpus:
-        line = line.strip()
-        if target_word in line:
+        if target in line:
+            # Target markieren
+            line = line.replace(target, "<" + target + ">")
             list = line.split()
+            # ... und als Liste an unsere Liste von in Frage kommenden Sätzen anhängen
             corpus_list.append(list)
 
-    count = 4
-    for i in range(count):
-        # Seed sentence auswählen und target darin markieren
-        try:
-            seed_id, seed_sentence, og_sentence = choose_seed(target_word, corpus_list)
-        except ValueError:
-            raise SystemExit(f"Target: '{target_word}' nicht vorhanden")
+    # Seed sentence auswählen
+    seed_id, seed_sentence = choose_seed(target, corpus_list)
 
-        # Originalsatz (= Target unmarkiert) zum Bundle hinzufügen
-        # (hier ist das Target aktuell noch eingeklammert?)
+    # Satz zum Bundle hinzufügen
+    bundle.append(seed_sentence)
+    # Diesen Satz aus corpus_list entfernen (denn wir wollen ja keinen Satz doppelt im Bundle haben)
+    corpus_list.remove(corpus_list[seed_id])
 
-        if og_sentence not in bundle:
-            bundle.append(og_sentence)
-            count += 1
+    print("Generiere Distraktoren mit Fastsubs...")
+    # Von Fastsubs distractors generieren lassen
+    distractor_list = fastsubs_distractor_generator(
+        fastsubs_instance, seed_sentence, target
+    )
 
-    for b in bundle:
-        b = " ".join(b)
-        distractor_list = fastsubs_gap_generator(fastsubs_instance, [b], target_word)
-        print(b, target_word, distractor_list)
+    print("...")
+    print("Unser erster Satz:")
+    print("'" + " ".join(seed_sentence) + "'")
+    print("Disambiguation level: " + str(disamb(bundle, target, distractor_list)))
+
+    print("...")
+    print("Jetzt fangen wir an, weitere Sätze zu suchen.")
+    print("...")
+
+    # Hier suchen wir mithilfe einer while-Schleife immer den nächsten Satz aus, der unser disambiguation level optimiert.
+    count = 1
+    while count < 4:
+        best_sentence_id = best_next_sentence(
+            corpus_list, bundle, target, distractor_list
+        )
+        if best_sentence_id != -1:
+            bundle.append(corpus_list[best_sentence_id])
+            corpus_list.remove(corpus_list[best_sentence_id])
+            print("Satz Nr. " + str(count + 1) + " gefunden!")
+            print(
+                "Disambiguation level: " + str(disamb(bundle, target, distractor_list))
+            )
+        else:
+            bundle.append(
+                ["ERROR: target_prob/max_other_prob = 0. Noch einmal versuchen?"]
+            )
+            break
+        count = count + 1
+
+    # output
+    output(bundle, target)
 
 
 if __name__ == "__main__":
-    incoming_data = "data/incoming_text_data/sentences.txt"
-    generate_bundle(incoming_data, target_word="pineapple")
+    corpus = open(
+        "data/incoming_text_data/sentences.txt",
+        "r",
+    )
+    main(corpus)

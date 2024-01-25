@@ -36,11 +36,21 @@ def fastsubs_gap_generator(fastsubs_instance, input_sentences, target_word):
 
     prob = fastsubs_instance.run_fastsubs(input_sentences)
 
+    final_distractors = list()
+
     for row in prob.keys():
         if target_word in row:
-            return prob.get(row)
+
+            distractor = prob.get(row)
+
+            # split distractor list:
+            for d in distractor:
+                d_res = d.split(" ")[0]
+                final_distractors.append(d_res)
+
+            return final_distractors
     else:
-        return prob
+        return ["empty"]
 
 
 ###########Hilfsmethoden kenlm##############
