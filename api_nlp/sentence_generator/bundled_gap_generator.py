@@ -1,26 +1,22 @@
 # Standard
-import os
+import math
+import random
 
 # Pip
 import kenlm
 
-
 # Custom
-import math
-import random
-
+from api_nlp.fastsubs_wrapper.fastsubs import FastSubs
 
 # kenlm initialisieren
 model = kenlm.LanguageModel("data/language_model/en-70k-0.2-pruned.lm")
-from api_nlp.fastsubs_wrapper.fastsubs import FastSubs
 
 fastsubs_instance = FastSubs(
-    model="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/language_model/en-70k-0.2-pruned.lm",
-    incoming_data="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/incoming_text_data/sentences.txt",
-    fastsubs_m1="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/api_nlp/fastsubs_wrapper/fastsubs_m1",
+    model="data/language_model/en-70k-0.2-pruned.lm",
+    incoming_data="data/incoming_text_data/sentences.txt",
+    fastsubs_m1="api_nlp/fastsubs_wrapper/fastsubs_m1",
     n_gram=2,
 )
-
 
 # Methode, die uns einen zufälligen seed sentence (als Liste) aussucht und mit ID zurückgibt
 def choose_seed(target, corpus_list):

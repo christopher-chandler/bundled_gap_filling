@@ -7,8 +7,7 @@ class FastSubs:
         n_gram=2,
         model="../../data/language_model/en-70k-0.2-pruned.lm",
         incoming_data="../data/incoming_text_data/sentences.txt",
-        fastsubs_m1="/Users/christopherchandler/code_repos/christopher-chandler"
-        "/Python/nlp/rub/bundled_gap_filling/api_nlp/fastsubs_wrapper/fastsubs_m1",
+        fastsubs_m1="../../api_nlp/fastsubs_wrapper/fastsubs_m1",
     ):
         self.n_gram = n_gram
         self.model = model
@@ -50,8 +49,4 @@ class FastSubs:
 
 
 if __name__ == "__main__":
-    fastsubs_instance = FastSubs()
-
-    input_sentences = ["Sarah eats apples too"]
-    prob = fastsubs_instance.run_fastsubs(input_sentences)
-    print(prob)
+    pass

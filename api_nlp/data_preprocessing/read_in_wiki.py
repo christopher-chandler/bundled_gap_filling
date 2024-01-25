@@ -113,11 +113,4 @@ class WikiData:
 
 
 if __name__ == "__main__":
-
-    file_path = (
-        "/Users/christopherchandler/code_repos/christopher-chandler/"
-        "Python/nlp/rub/bundled_gap_filling/data/wiki_data/simple_wiki_en_01_319188.json"
-    )
-    wiki_data = WikiData(incoming_file=file_path, categories="mammals")
-
-    wiki_data.save_as_one_file()
+    pass

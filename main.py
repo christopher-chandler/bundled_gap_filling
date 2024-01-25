@@ -1,7 +1,5 @@
 # Standard
-import subprocess
-
-from api_nlp.fastsubs_wrapper.fastsubs import FastSubs
+# None
 
 # Pip
 # None
@@ -9,18 +7,10 @@ from api_nlp.fastsubs_wrapper.fastsubs import FastSubs
 # Custom
 from api_nlp.sentence_generator.bundled_gap_generator import *
 
-fastsubs_instance = FastSubs(
-    model="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/language_model/en-70k-0.2-pruned.lm",
-    incoming_data="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/data/incoming_text_data/sentences.txt",
-    fastsubs_m1="/Users/christopherchandler/code_repos/christopher-chandler/Python/nlp/rub/bundled_gap_filling/api_nlp/fastsubs_wrapper/fastsubs_m1",
-    n_gram=2,
-)
 
-
-def main(corpus):
+def main(corpus, target):
     # Korpus, aus dem Sätze gezogen werden sollen, und Target festlegen sowie leeres Bundle initiieren
     print("Initialisierung...")
-    target = "eat"
     bundle = []
     # Sätze, die das Target enthalten, als Liste in Liste schreiben
     corpus_list = []
@@ -84,4 +74,5 @@ if __name__ == "__main__":
         "data/incoming_text_data/sentences.txt",
         "r",
     )
-    main(corpus)
+    target = "pears"
+    main(corpus, target)
